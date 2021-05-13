@@ -1,33 +1,32 @@
 import { useEffect, useState } from "react";
 import PokemonThumnail from "./components/PokemonThumnail";
 
+/**CONSUMO DA API */
 function Pokedex() {
-
   const [allPokemons, setAllPokemons] = useState([])
   const [loadmore, setLoadMore] = useState('https://pokeapi.co/api/v2/pokemon?limit=20')
-
   const getAllPokemons = async () => {
-    const res = await fetch(loadmore)
-    const data = await res.json()
+  const res = await fetch(loadmore)
+  const data = await res.json()
 
-    setLoadMore(data.next)
-    
-    function createPokemonObject (result) {
-      result.forEach( async (pokemon) => {
-          const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
-          const data = await res.json()
+  setLoadMore(data.next)
+  
+  function createPokemonObject (result) {
+    result.forEach( async (pokemon) => {
+      const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
+      const data = await res.json()
 
-          setAllPokemons(currentList => [...currentList, data])
-          await console.log(allPokemons)
-      })
-    }
-    createPokemonObject(data.results)
+        setAllPokemons(currentList => [...currentList, data])
+    })
   }
+  createPokemonObject(data.results)
+}
 
-  useEffect(() => {
-    getAllPokemons()
-  }, [])
+useEffect(() => {
+  getAllPokemons()
+}, [])
 
+ /** CHAMADA DOS PARÂMETROS DOS POKEMONS NA API */
   return (
     <div className="app-container">
       <h1>Pokedex</h1>

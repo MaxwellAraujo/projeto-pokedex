@@ -1,5 +1,6 @@
 import React from 'react'
 
+/**RENDERIZAÇÃO DO CARD */
 const PokemonThumnail = ({id, name, image, type}) => {
 
     const style = `thumb-container ${type}`
@@ -8,7 +9,7 @@ const PokemonThumnail = ({id, name, image, type}) => {
             <div className="number">
                 <small>#{id}</small>
             </div>
-            <img src={image} alt={name} />
+            <img src={image} alt={name}/>
             <div className="detail-whapper">
                 <h3>{name}</h3>
                 <small>Type: {type}</small>
